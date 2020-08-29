@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html {{ LaravelLocalization::getCurrentLocaleDirection() }}>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -169,8 +169,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-o"></i></a>
                         <ul class="dropdown-menu">
                             <li>
-                                {{--<!-- inner menu: contains the actual data -->--}}
-                                {{-- <ul class="menu">
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
                                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                         <li>
                                             <a rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
@@ -178,7 +178,7 @@
                                             </a>
                                         </li>
                                     @endforeach
-                                </ul> --}}
+                                </ul>
                             </li>
                         </ul>
                     </li>
