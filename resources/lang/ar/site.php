@@ -14,12 +14,15 @@ return [
   'password' => 'كلمه المرور',
   'password_confirmation' => 'تاكيد كلمه المرور',
   'add_successfully' => 'تم الاضافه بنجاح',
-  'updated_successfully' => 'تم الاضافه بنجاح',
-  'deleted_successfully' => 'تم الاضافه بنجاح',
+  'updated_successfully' => 'تم التعديل بنجاح',
+  'deleted_successfully' => 'تم الحذف بنجاح',
   'permissions' => 'الصلاحيات',
   'create' => 'اضافه',
   'read' => 'عرض',
   'update' => 'تحديث',
-
+  'logout' => 'تسجيل الخروج',
+  'yes' => 'نعم',
+  'no' => 'لا',
+  'confirm_delete' => 'تاكيد الحذف',
 
 ];

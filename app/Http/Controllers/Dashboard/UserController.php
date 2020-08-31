@@ -8,11 +8,33 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
-    public function index()
+    public function __construct()
     {
-        $users = User::all();
+
+        $this->middleware(['permission:users_read'])->only('index');
+        $this->middleware(['permission:users_create'])->only('create');
+        $this->middleware(['permission:users_update'])->only('edit');
+        $this->middleware(['permission:users_delete'])->only('destroy');
+
+    }
+
+    public function index(Request $request)
+    {
+
+        $users = User::whereRoleIs('admin')->where(function ($q) use ($request) {
+
+            return $q->when($request->search, function ($query) use ($request) {
+
+                return $query->where('first_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+
+            });
+
+        })->latest()->paginate(3);
+
         return view('Dashboard.users.index', compact('users'));
+
     }
 
 
@@ -77,6 +99,10 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        session()->flash('success', ('site.deleted_successfully'));
+
+        return redirect(route('dashboard.users.index'));
     }
 }

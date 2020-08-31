@@ -6,7 +6,7 @@
 
         <section class="content-header">
 
-            <h1>@lang('site.users')</h1>
+            <h1>@lang('site.users') | {{ $users->total() }}</h1>
 
             <ol class="breadcrumb">
                 <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-dashboard"></i> @lang('site.dashboard')</a></li>
@@ -80,7 +80,7 @@
                                               <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                           </form><!-- end of form -->
                                         @else
-                                          <button class="btn btn-danger disabled btn-sm">@lang('site.delete')</button>
+                                          <button class="btn btn-danger disabled btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -89,6 +89,10 @@
                             </tbody>
 
                         </table><!-- end of table -->
+
+                        <div>
+                          {{ $users->appends(request()->query())->links() }}
+                        </div>
 
                     @else
 
