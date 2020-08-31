@@ -62,6 +62,7 @@
 
                                 @php
                                     $models = ['users', 'categories', 'products', 'clients', 'orders'];
+                                    $maps = ['create', 'read', 'update', 'delete'];
                                 @endphp
 
                                 <ul class="nav nav-tabs">
@@ -75,10 +76,10 @@
                                     @foreach ($models as $index=>$model)
 
                                         <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
-                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_create">@lang('site.create')</input></label>
-                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_read">@lang('site.read')</input></label>
-                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_update">@lang('site.update')</input></label>
-                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_delete">@lang('site.delete')</input></label>
+
+                                          @foreach ($maps as $map)
+                                            <label><input type="checkbox" name="permissions[]" value="{{ $model . '_' . $map }}">@lang('site.' . $map)</input></label>
+                                          @endforeach
 
                                         </div>
 

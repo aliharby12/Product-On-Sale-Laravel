@@ -31,14 +31,18 @@
 
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> @lang('site.search')</button>
-                                <a href="{{ route('dashboard.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                @if (auth()->user()->hasPermission('users_create'))
+                                  <a href="{{ route('dashboard.users.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                @else
+                                  <a href="#" class="btn btn-primary disabled"><i class="fa fa-plus"></i> @lang('site.add')</a>
+                                @endif
                             </div>
 
                         </div>
                     </form><!-- end of form -->
 
                 </div><!-- end of box header -->
-                
+
                 <div class="box-body">
 
                     @if ($users->count() > 0)
@@ -63,14 +67,21 @@
                                     <td>{{ $user->last_name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                        @if (auth()->user()->hasPermission('users_update'))
+                                          <a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn btn-info btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                        @else
+                                          <a href="#" class="btn btn-info disabled btn-sm"><i class="fa fa-edit"></i> @lang('site.edit')</a>
+                                        @endif
 
-                                        <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post" style="display: inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
-                                        </form><!-- end of form -->
-
+                                        @if (auth()->user()->hasPermission('users_delete'))
+                                          <form action="{{ route('dashboard.users.destroy', $user->id) }}" method="post" style="display: inline-block">
+                                              @csrf
+                                              @method('DELETE')
+                                              <button type="submit" class="btn btn-danger delete btn-sm"><i class="fa fa-trash"></i> @lang('site.delete')</button>
+                                          </form><!-- end of form -->
+                                        @else
+                                          <button class="btn btn-danger disabled btn-sm">@lang('site.delete')</button>
+                                        @endif
                                     </td>
                                 </tr>
 
