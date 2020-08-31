@@ -16,5 +16,10 @@ return [
   'add_successfully' => 'تم الاضافه بنجاح',
   'updated_successfully' => 'تم الاضافه بنجاح',
   'deleted_successfully' => 'تم الاضافه بنجاح',
+  'permissions' => 'الصلاحيات',
+  'create' => 'اضافه',
+  'read' => 'عرض',
+  'update' => 'تحديث',
+
 
 ];

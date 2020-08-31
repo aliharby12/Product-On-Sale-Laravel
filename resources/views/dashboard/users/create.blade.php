@@ -57,6 +57,40 @@
                       </div>
 
                       <div class="form-group">
+                            <label>@lang('site.permissions')</label>
+                            <div class="nav-tabs-custom">
+
+                                @php
+                                    $models = ['users', 'categories', 'products', 'clients', 'orders'];
+                                @endphp
+
+                                <ul class="nav nav-tabs">
+                                    @foreach ($models as $index=>$model)
+                                        <li class="{{ $index == 0 ? 'active' : '' }}"><a href="#{{ $model }}" data-toggle="tab">@lang('site.' . $model)</a></li>
+                                    @endforeach
+                                </ul>
+
+                                <div class="tab-content">
+
+                                    @foreach ($models as $index=>$model)
+
+                                        <div class="tab-pane {{ $index == 0 ? 'active' : '' }}" id="{{ $model }}">
+                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_create">@lang('site.create')</input></label>
+                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_read">@lang('site.read')</input></label>
+                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_update">@lang('site.update')</input></label>
+                                          <label><input type="checkbox" name="permissions[]" value="{{ $model }}_delete">@lang('site.delete')</input></label>
+
+                                        </div>
+
+                                    @endforeach
+
+                                </div><!-- end of tab content -->
+
+                            </div><!-- end of nav tabs -->
+
+                        </div>
+
+                      <div class="form-group">
                           <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
                       </div>
 

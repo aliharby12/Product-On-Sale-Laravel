@@ -33,11 +33,13 @@ class UserController extends Controller
 
         ]);
 
-        $request_data = $request->except(['password']);
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
 
         $request_data['password'] = bcrypt($request->password);
 
         $user = User::create($request_data);
+        $user->attachRole('admin');
+        $user->syncPermissions($request->permissions);
 
         session()->flash('success', __('site.add_successfully'));
 

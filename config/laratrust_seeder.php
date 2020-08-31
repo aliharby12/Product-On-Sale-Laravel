@@ -12,9 +12,14 @@ return [
     'truncate_tables' => true,
 
     'roles_structure' => [
+
+      // super admin role
         'super_admin' => [
             'users' => 'c,r,u,d',
         ],
+
+        // admin role
+        'admin' => [],
     ],
 
     'permissions_map' => [
