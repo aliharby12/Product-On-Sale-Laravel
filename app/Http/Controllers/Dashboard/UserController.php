@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -52,9 +53,11 @@ class UserController extends Controller
 
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users',
             'password' => 'required|confirmed',
-            'image' => 'required|image'
+            'image' => 'required|image',
+            'permissions' => 'required|min:1'
+
 
         ]);
 
@@ -96,11 +99,36 @@ class UserController extends Controller
 
           'first_name' => 'required',
           'last_name' => 'required',
-          'email' => 'required',
+          'email' => [
+            'required',
+            Rule::unique('users')->ignore($user->id),
+          ],
+          'image' => 'required|image',
+          'permissions' => 'required|min:1'
 
       ]);
 
-      $request_data = $request->except(['permissions']);
+      $request_data = $request->except(['permissions', 'image']);
+
+      if ($request->image) {
+
+          if ($user->image != 'default.jpg') {
+
+            Storage::disk('public_uploads')->delete('/avatars/' . $user->image);
+
+          }
+
+          Image::make($request->image)->resize(300, null, function($constraint){
+
+            $constraint->aspectRatio();
+
+          })
+          ->save(public_path('uploads/avatars/' . $request->image->hashName()));
+
+          $request_data['image'] = $request->image->hashName();
+
+
+      } //end of iamge
 
       $user->update($request_data);
 

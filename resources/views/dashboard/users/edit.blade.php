@@ -47,6 +47,11 @@
                       </div>
 
                       <div class="form-group">
+                          <label>@lang('site.image')</label>
+                          <input type="file" name="image" class="form-control" value="{{ $user->image_path }}">
+                      </div>
+
+                      <div class="form-group">
                             <label>@lang('site.permissions')</label>
                             <div class="nav-tabs-custom">
 
