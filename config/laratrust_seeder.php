@@ -16,6 +16,7 @@ return [
       // super admin role
         'super_admin' => [
             'users' => 'c,r,u,d',
+            'categories' => 'c,r,u,d',
         ],
 
         // admin role

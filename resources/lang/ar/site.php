@@ -26,5 +26,8 @@ return [
   'confirm_delete' => 'تاكيد الحذف',
   'image' => 'صوره',
   'login' => 'تسجيل الدخول',
-  'remember_me' => 'تذكرني'
+  'remember_me' => 'تذكرني',
+  'categories' => 'الاقسام',
+  'name' => 'الاسم',
+  'no_records' => 'لا يوجد اي سجلات حتى الان'
 ];
