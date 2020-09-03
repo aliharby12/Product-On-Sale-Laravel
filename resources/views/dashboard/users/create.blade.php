@@ -47,6 +47,11 @@
                       </div>
 
                       <div class="form-group">
+                          <label>@lang('site.image')</label>
+                          <input type="file" name="image" class="form-control">
+                      </div>
+
+                      <div class="form-group">
                           <label>@lang('site.password')</label>
                           <input type="password" name="password" class="form-control">
                       </div>

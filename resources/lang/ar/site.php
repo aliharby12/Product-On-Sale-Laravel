@@ -24,5 +24,6 @@ return [
   'yes' => 'نعم',
   'no' => 'لا',
   'confirm_delete' => 'تاكيد الحذف',
+  'image' => 'صوره',
 
 ];

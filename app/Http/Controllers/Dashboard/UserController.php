@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -52,12 +54,26 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required',
             'password' => 'required|confirmed',
+            'image' => 'required|image'
 
         ]);
 
-        $request_data = $request->except(['password', 'password_confirmation', 'permissions']);
+        $request_data = $request->except(['password', 'password_confirmation', 'permissions', 'image']);
 
         $request_data['password'] = bcrypt($request->password);
+
+        if ($request->image) {
+
+          Image::make($request->image)->resize(300, null, function($constraint){
+
+            $constraint->aspectRatio();
+
+          })
+          ->save(public_path('uploads/avatars/' . $request->image->hashName()));
+
+          $request_data['image'] = $request->image->hashName();
+
+        } //end of iamge
 
         $user = User::create($request_data);
         $user->attachRole('admin');
@@ -99,6 +115,11 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->image != 'default.jpg') {
+
+          Storage::disk('public_uploads')->delete('/avatars/' . $user->image);
+        }
+
         $user->delete();
 
         session()->flash('success', ('site.deleted_successfully'));
