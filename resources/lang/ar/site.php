@@ -25,5 +25,6 @@ return [
   'no' => 'لا',
   'confirm_delete' => 'تاكيد الحذف',
   'image' => 'صوره',
-
+  'login' => 'تسجيل الدخول',
+  'remember_me' => 'تذكرني'
 ];
