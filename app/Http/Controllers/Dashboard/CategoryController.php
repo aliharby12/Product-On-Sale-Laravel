@@ -30,11 +30,15 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $rules = [];
 
-          'name' => 'required|unique:categories',
+        foreach (config('translatable.locales') as $locale) {
 
-        ]);
+          $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')]];
+
+        }
+
+        $request->validate($rules);
 
         Category::create($request->all());
 
@@ -58,14 +62,16 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category)
     {
-      $request->validate([
 
-        'name' => [
-          'required',
-          Rule::unique('categories')->ignore($category->id),
-        ],
+      $rules = [];
 
-      ]);
+      foreach (config('translatable.locales') as $locale) {
+
+        $rules += [$locale . '.name' => ['required', Rule::unique('category_translations', 'name')->ignore($category,'category_id')]];
+
+      }
+
+      $request->validate($rules);
 
       $category->update($request->all());
 

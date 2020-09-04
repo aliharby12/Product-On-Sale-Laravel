@@ -31,10 +31,12 @@
 
                       @csrf
 
-                      <div class="form-group">
-                          <label>@lang('site.name')</label>
-                          <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                      </div>
+                      @foreach (config('translatable.locales') as $locale)
+                        <div class="form-group">
+                            <label>@lang('site.' . $locale . '.name')</label>
+                            <input type="text" name="{{ $locale }}[name]" class="form-control" value="{{ old($locale . '.name') }}">
+                        </div>
+                      @endforeach
 
                       <div class="form-group">
                           <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> @lang('site.add')</button>
