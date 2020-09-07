@@ -55,7 +55,6 @@ class UserController extends Controller
             'last_name' => 'required',
             'email' => 'required|unique:users',
             'password' => 'required|confirmed',
-            'image' => 'required|image',
             'permissions' => 'required|min:1'
 
 

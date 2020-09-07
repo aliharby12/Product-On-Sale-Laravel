@@ -49,14 +49,18 @@
 
                         <table class="table table-hover">
                             <tr>
+                                <th>#</th>
                                 <th>@lang('site.name')</th>
+                                <th>@lang('site.products_count')</th>
                                 <th>@lang('site.action')</th>
                             </tr>
 
-                            @foreach ($categories as $category)
+                            @foreach ($categories as $index=>$category)
 
                                 <tr>
+                                    <td>{{ $index + 1 }}</td>
                                     <td>{{ $category->name }}</td>
+                                    <td>{{ $category->products->count() }}</td>
                                     <td>
                                         @if (auth()->user()->hasPermission('categories_update'))
                                             <a href="{{ route('dashboard.categories.edit', $category->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil"></i> @lang('site.edit')</a>

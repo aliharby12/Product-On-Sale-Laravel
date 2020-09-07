@@ -17,5 +17,8 @@ Route::group(
 			// categories routes
 			Route::resource('categories', 'CategoryController')->except(['show']);
 
+			// products routes
+			Route::resource('products', 'ProductController')->except(['show']);
+
   });
 });
