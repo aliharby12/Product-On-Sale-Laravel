@@ -9,7 +9,7 @@ Route::group(
 
   Route::prefix('dashboard')->middleware(['auth'])->name('dashboard.')->group(function(){
 
-      Route::get('/index', 'DashboardController@index')->name('index');
+      Route::get('/', 'DashboardController@index')->name('index');
 
 			// users routes
 			Route::resource('users', 'UserController')->except(['show']);
@@ -21,6 +21,9 @@ Route::group(
 			Route::resource('products', 'ProductController')->except(['show']);
 			Route::get('/test', function(){
 			  return view('site.index');
+			});
+			Route::get('/test1', function(){
+			  return view('site.home');
 			});
   });
 });

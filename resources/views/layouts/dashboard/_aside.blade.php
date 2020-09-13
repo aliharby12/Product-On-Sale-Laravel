@@ -13,18 +13,18 @@
         </div>
 
         <ul class="sidebar-menu" data-widget="tree">
-            <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-th"></i><span>@lang('site.dashboard')</span></a></li>
+            <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-home"></i><span>@lang('site.dashboard')</span></a></li>
 
             @if (auth()->user()->hasPermission('users_read'))
-              <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-th"></i><span>@lang('site.users')</span></a></li>
+              <li><a href="{{ route('dashboard.users.index') }}"><i class="fa fa-users"></i><span>@lang('site.users')</span></a></li>
             @endif
 
             @if (auth()->user()->hasPermission('categories_read'))
-              <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-th"></i><span>@lang('site.categories')</span></a></li>
+              <li><a href="{{ route('dashboard.categories.index') }}"><i class="fa fa-rocket"></i><span>@lang('site.categories')</span></a></li>
             @endif
 
             @if (auth()->user()->hasPermission('products_read'))
-              <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-th"></i><span>@lang('site.products')</span></a></li>
+              <li><a href="{{ route('dashboard.products.index') }}"><i class="fa fa-shopping-basket"></i></i><span>@lang('site.products')</span></a></li>
             @endif
 
             {{-- @if (auth()->user()->hasPermission('read_categories'))
