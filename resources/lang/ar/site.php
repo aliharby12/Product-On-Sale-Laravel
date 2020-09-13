@@ -47,6 +47,9 @@ return [
   'sale_price' => 'سعر البيع',
   'stock' => 'المخزن',
   'products_count' => 'عدد المنتجات',
-  'category_products' => 'منتجات هذا القسم'
+  'category_products' => 'منتجات هذا القسم',
 
+  // site transition
+
+  // 'Home' => 'الرئيسيه'
 ];
