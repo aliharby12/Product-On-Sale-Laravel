@@ -19,11 +19,9 @@ Route::group(
 
 			// products routes
 			Route::resource('products', 'ProductController')->except(['show']);
-			Route::get('/test', function(){
-			  return view('site.index');
-			});
-			Route::get('/test1', function(){
-			  return view('site.home');
-			});
+
+			// clients routes
+			Route::resource('clients', 'ClientController')->except(['show']);
+
   });
 });

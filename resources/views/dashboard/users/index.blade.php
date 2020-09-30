@@ -98,7 +98,7 @@
 
                     @else
 
-                        <h2>@lang('site.no_data_found')</h2>
+                        <h3>@lang('site.no_data_found')</h3>
 
                     @endif
 

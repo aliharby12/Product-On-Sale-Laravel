@@ -16,8 +16,14 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = Product::paginate(6);
-        return view('Dashboard.products.index', compact('products'));
+        $products = Product::when($request->search, function ($q) use ($request) {
+            return $q->whereTranslationLike('name', '%' . $request->search . '%');
+        })->when($request->category_id, function ($q) use ($request) {
+            return $q->where('category_id', $request->category_id);
+        })->latest()->paginate(10);
+
+        $categories = Category::all();
+        return view('Dashboard.products.index', compact('products', 'categories'));
     }
 
 

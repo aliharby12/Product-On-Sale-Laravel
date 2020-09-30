@@ -191,6 +191,6 @@ return [
         'purchase_price' => 'سعر الشراء',
         'sale_price' => 'سعر البيع',
         'stock' => 'المخزن',
-
+        'phone.0' => 'رقم الهاتف'
     ],
 ];

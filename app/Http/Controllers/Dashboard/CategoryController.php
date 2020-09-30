@@ -10,10 +10,21 @@ use Illuminate\Validation\Rule;
 class CategoryController extends Controller
 {
 
+  public function __construct()
+  {
+
+      $this->middleware(['permission:categories_read'])->only('index');
+      $this->middleware(['permission:categories_create'])->only('create');
+      $this->middleware(['permission:categories_update'])->only('edit');
+      $this->middleware(['permission:categories_delete'])->only('destroy');
+
+  }
+
+
   public function index(Request $request)
   {
       $categories = Category::when($request->search, function ($q) use ($request) {
-          return $q->where('name', '%' . $request->search . '%');
+          return $q->whereTranslationLike('name', '%' . $request->search . '%');
       })->latest()->paginate(10);
 
       return view('dashboard.categories.index', compact('categories'));
